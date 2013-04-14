@@ -1,0 +1,7 @@
+{
+    "name": "firebug-plonedemo-buildout",
+    "version": "0.1.0",
+    "dependencies": {
+        "firebug-plonedemo-resources": "src/js_chat"
+    }
+}

@@ -33,3 +33,5 @@ access
 .codeintel
 *.sublime-project
 *.sublime-workspace
+components
+node_modules
