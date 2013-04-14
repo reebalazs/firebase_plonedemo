@@ -1,3 +1,6 @@
 
 FireBase PloneDemo:
 
+
+- problems
+  - angular-firebase is a newer version, so we have to include angularFire.js.

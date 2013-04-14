@@ -1,8 +1,7 @@
 {
-    "name": "firebug-plonedemo-resources",
+    "name": "firebase-plonedemo-resources",
     "version": "0.1.0",
     "dependencies": {
-        "angular": "*",
-        "angular-firebase": "*"
+        "angular": "*"
     }
 }
