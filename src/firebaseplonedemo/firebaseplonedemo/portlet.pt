@@ -21,7 +21,33 @@
     </dt>
 
     <dd class="portletItem odd">
-        <div tal:replace="structure view/transformed" />
+
+        <script src="../../components/angular/angular.js"
+            tal:attributes="src string:${context/++resource++firebugplonedemo}/dist/angular.js"
+          ></script>
+        <div ng-controller="Chat">
+          <div>
+            <label for="">Your name: </label><input type="text" ng-model="username">
+          </div>
+          <p></p>
+          <div id="messagesDiv" style="height:500px;">
+            <div ng-cloak ng-repeat="message in messages">
+              <em>{{message.from}}: </em>{{message.content}}
+            </div>
+          </div>
+          <form ng-submit="addMessage()">
+            <input type="text" ng-model="message" placeholder="Message...">
+            <input type="submit" id="submit" value="Send" style="font-size:24px;">
+          </form>
+          <script src="https://cdn.firebase.com/v0/firebase.js"></script>
+          <script src="angularfire.js" 
+                  tal:attributes = "src context/++resource++firebugplonedemo/angularfire.js" 
+            ></script>
+          <script src="app.js"
+                  tal:attributes = "src context/++resource++firebugplonedemo/app.js" 
+            ></script>
+        </div>
+
         <tal:corners condition="not:view/has_footer">
             <span class="portletBottomLeft"></span>
             <span class="portletBottomRight"></span>

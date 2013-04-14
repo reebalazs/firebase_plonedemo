@@ -3,7 +3,6 @@
 *.egg
 *.egg-info
 build
-dist
 bin
 include
 lib
