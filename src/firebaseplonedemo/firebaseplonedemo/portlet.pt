@@ -25,7 +25,7 @@
     <dd class="portletItem odd">
 
         <script src="../../components/angular/angular.js"
-            tal:attributes="src string:${context/++resource++firebugplonedemo}/dist/components/angular/angular.js"
+            tal:attributes="src string:${context/++resource++firebaseplonedemo}/dist/components/angular/angular.js"
           ></script>
         <div ng-controller="Chat">
           <div>
@@ -43,10 +43,11 @@
           </form>
           <script src="https://cdn.firebase.com/v0/firebase.js"></script>
           <script src="angularfire.js" 
-                  tal:attributes = "src context/++resource++firebugplonedemo/angularfire.js" 
+                  tal:attributes = "src context/++resource++firebaseplonedemo/angularfire.js" 
             ></script>
+          <meta name="firebaseplonedemo-username" tal:attributes="content context/portal_membership/getAuthenticatedMember">
           <script src="app.js"
-                  tal:attributes = "src context/++resource++firebugplonedemo/app.js" 
+                  tal:attributes = "src context/++resource++firebaseplonedemo/app.js" 
             ></script>
         </div>
 

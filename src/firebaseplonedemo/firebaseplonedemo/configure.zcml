@@ -34,7 +34,7 @@
          />
 
     <browser:resourceDirectory
-        name="firebugplonedemo"
+        name="firebaseplonedemo"
         directory="static"
         />
 
