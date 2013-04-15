@@ -25,7 +25,7 @@
     <dd class="portletItem odd">
 
         <script src="../../components/angular/angular.js"
-            tal:attributes="src string:${context/++resource++firebugplonedemo}/dist/angular.js"
+            tal:attributes="src string:${context/++resource++firebugplonedemo}/dist/components/angular/angular.js"
           ></script>
         <div ng-controller="Chat">
           <div>
