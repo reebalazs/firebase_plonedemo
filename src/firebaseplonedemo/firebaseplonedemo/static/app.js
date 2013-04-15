@@ -8,7 +8,10 @@ controller('Chat', ['$scope', '$timeout', 'angularFireCollection',
         $scope.messages = angularFireCollection(url, function() {
             $timeout(function() { el.scrollTop = el.scrollHeight; });
         });
+
         var ploneUsername = jQuery('meta[name="firebaseplonedemo-username"]').attr('content');
+
+
         if (ploneUsername == 'Anonymous User') {
             $scope.username = 'Anonymous' + Math.floor(Math.random()*101);
         } else {
@@ -19,6 +22,10 @@ controller('Chat', ['$scope', '$timeout', 'angularFireCollection',
                 el.scrollTop = el.scrollHeight;
             });
             $scope.message = "";
+            
+            // prevent double click warning for this form
+            jQuery('input[value="Send"]').removeClass('submitting');
+
         };
     }
 ]);
