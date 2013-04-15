@@ -43,7 +43,7 @@
           </form>
           <script src="https://cdn.firebase.com/v0/firebase.js"></script>
           <script src="angularfire.js" 
-                  tal:attributes = "src context/++resource++firebaseplonedemo/angularfire.js" 
+                  tal:attributes = "src context/++resource++firebaseplonedemo/angularFire.js" 
             ></script>
           <meta name="firebaseplonedemo-username" tal:attributes="content context/portal_membership/getAuthenticatedMember">
           <script src="app.js"
