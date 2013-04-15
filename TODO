@@ -3,4 +3,9 @@ FireBase PloneDemo:
 
 
 - problems
+
   - angular-firebase is a newer version, so we have to include angularFire.js.
+
+  - need to add ++resource++angular.js to RR profile.
+
+  - the production of ++resource++angular.js needs a Gruntfile.js.

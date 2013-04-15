@@ -2,6 +2,6 @@
     "name": "firebase-plonedemo-buildout",
     "version": "0.1.0",
     "dependencies": {
-        "firebase-plonedemo-resources": "src/js_chat"
+        "firebase-plonedemo-resources": "src/firebaseplonedemo/firebaseplonedemo/static"
     }
 }

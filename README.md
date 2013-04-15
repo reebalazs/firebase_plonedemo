@@ -1,4 +1,4 @@
 
-# FireBug PloneDemo #
+# FireBase PloneDemo #
 
 XXX
