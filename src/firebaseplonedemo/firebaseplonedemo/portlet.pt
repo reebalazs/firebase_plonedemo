@@ -45,7 +45,7 @@
           <script src="angularfire.js" 
                   tal:attributes = "src context/++resource++firebaseplonedemo/angularFire.js" 
             ></script>
-          <meta name="firebaseplonedemo-username" tal:attributes="content context/portal_membership/getAuthenticatedMember">
+          <meta name="firebaseplonedemo-auth-token" tal:attributes="content context/gen_auth_token">
           <script src="app.js"
                   tal:attributes = "src context/++resource++firebaseplonedemo/app.js" 
             ></script>

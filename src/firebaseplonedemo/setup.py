@@ -45,6 +45,7 @@ setup(name='firebaseplonedemo',
           'zope.interface',
           'zope.schema',
           'Zope2',
+          'firebase_token_generator',
       ],
       entry_points="""
       [z3c.autoinclude.plugin]

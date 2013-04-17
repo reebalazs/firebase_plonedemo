@@ -34,3 +34,4 @@ access
 *.sublime-workspace
 components
 node_modules
+src/firebase_token_generator
