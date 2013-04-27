@@ -21,5 +21,5 @@ Future:
 
   - Find also a firebase.js that currently comes from CDN
 
-  - The gruntfile should rather be in the src package, but then error.
+  + The gruntfile should rather be in the src package, but then error. @done (13-04-27 14:44)
 
