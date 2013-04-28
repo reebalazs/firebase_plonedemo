@@ -5,23 +5,29 @@ angular.module('firebase', []).value('Firebase', Firebase);
 // Implicit syncing. angularFire binds a model to $scope and keeps the dat
 // synchronized with a Firebase location both ways.
 // TODO: Optimize to use child events instead of whole 'value'.
-angular.module('firebase').factory('angularFire', ['$q', function($q) {
-  return function(url, scope, name, ret) {
-    var af = new AngularFire($q, url);
+angular.module('firebase').factory('angularFire', ['$q', '$parse', function($q, $parse) {
+  return function(ref, scope, name, ret) {
+    var af = new AngularFire($q, $parse, ref);
     return af.associate(scope, name, ret);
   };
 }]);
 
-function AngularFire($q, url) {
+function AngularFire($q, $parse, ref) {
   this._q = $q;
+  this._parse = $parse;
   this._initial = true;
   this._remoteValue = false;
-  this._fRef = new Firebase(url);
+
+  if (typeof ref == "string") {
+    this._fRef = new Firebase(ref);
+  } else {
+    this._fRef = ref.ref();
+  }
 }
 AngularFire.prototype = {
   associate: function($scope, name, ret) {
     var self = this;
-    if (!ret) {
+    if (ret == undefined) {
       ret = [];
     }
     var deferred = this._q.defer();
@@ -33,16 +39,16 @@ AngularFire.prototype = {
         deferred = false;
       }
       self._remoteValue = ret;
-      if (snap && snap.val()) {
+      if (snap && snap.val() != undefined) {
         var val = snap.val();
         if (typeof val != typeof ret) {
-          self._fRef.set(null);
+          self._log("Error: type mismatch");
           return;
         }
         // Also distinguish between objects and arrays.
         var check = Object.prototype.toString;
         if (check.call(ret) != check.call(val)) {
-          self._fRef.set(null);
+          self._log("Error: type mismatch");
           return;
         }
         self._remoteValue = angular.copy(val);
@@ -55,8 +61,13 @@ AngularFire.prototype = {
     });
     return promise;
   },
+  _log: function(msg) {
+    if (console && console.log) {
+      console.log(msg);
+    }
+  },
   _resolve: function($scope, name, deferred, val) {
-    $scope[name] = angular.copy(val);
+    this._parse(name).assign($scope, angular.copy(val));
     this._remoteValue = angular.copy(val);
     if (deferred) {
       deferred.resolve(val);
@@ -99,10 +110,16 @@ angular.module('firebase').factory('angularFireCollection', ['$timeout', functio
     angular.extend(this, ref.val());
   }
 
-  return function(collectionUrl, initialCb) {
+  return function(collectionUrlOrRef, initialCb) {
     var collection = [];
     var indexes = {};
-    var collectionRef = new Firebase(collectionUrl);
+
+    var collectionRef;
+    if (typeof collectionUrlOrRef == "string") {
+      collectionRef = new Firebase(collectionUrlOrRef);
+    } else {
+      collectionRef = collectionUrlOrRef;
+    }
 
     function getIndex(prevId) {
       return prevId ? indexes[prevId] + 1 : 0;
@@ -157,8 +174,9 @@ angular.module('firebase').factory('angularFireCollection', ['$timeout', functio
     collectionRef.on('child_removed', function(data) {
       $timeout(function() {
         var id = data.name();
+        var pos = indexes[id];
         removeChild(id);
-        updateIndexes(indexes[id]);
+        updateIndexes(pos);
       });
     });
 
@@ -185,15 +203,19 @@ angular.module('firebase').factory('angularFireCollection', ['$timeout', functio
     });
 
     collection.add = function(item, cb) {
-      collectionRef.push(item, cb ? cb : null);
+      if (!cb) {
+        collectionRef.ref().push(item);
+      } else {
+        collectionRef.ref().push(item, cb);
+      }
     };
     collection.remove = function(itemOrId) {
-      var item = angular.isString(itemOrId) ? collection[itemOrId] : itemOrId;
+      var item = angular.isString(itemOrId) ? collection[indexes[itemOrId]] : itemOrId;
       item.$ref.remove();
     };
 
     collection.update = function(itemOrId) {
-      var item = angular.isString(itemOrId) ? collection[itemOrId] : itemOrId;
+      var item = angular.isString(itemOrId) ? collection[indexes[itemOrId]] : itemOrId;
       var copy = {};
       angular.forEach(item, function(value, key) {
         if (key.indexOf('$') !== 0) {
