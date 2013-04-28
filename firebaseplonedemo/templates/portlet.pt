@@ -20,8 +20,10 @@
           </div>
           <p></p>
           <div id="messagesDiv" class="messagesDiv" style="height:500px; overflow: auto;">
-            <div ng-cloak ng-repeat="message in messages">
-              <em>{{message.from}}: </em>{{message.content}}
+            <div ng-cloak ng-repeat="message in messages"
+                 class="chat-line-{{{true: 'own', false: 'foreign'}[message.from == username]}}">
+              <div class="chat-sender">{{message.from}}:</div>
+              <div class="chat-content">{{message.content}}</div>
             </div>
           </div>
           <form ng-submit="addMessage()">

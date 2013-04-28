@@ -30,7 +30,7 @@ controller('Chat', ['$scope', '$timeout', 'angularFireCollection',
                         el.scrollTop = el.scrollHeight;
                     });
                 });
-                
+
                 $scope.addMessage = function() {
                     $scope.messages.add({from: $scope.username, content: $scope.message}, function() {
                         el.scrollTop = el.scrollHeight;
