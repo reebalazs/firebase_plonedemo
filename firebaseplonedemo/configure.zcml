@@ -38,6 +38,16 @@
         directory="static"
         />
 
+    <browser:viewlet
+        name="firebaseplonedemo.head"
+        class=".viewlet.HeadViewlet"
+        manager="plone.app.layout.viewlets.interfaces.IHtmlHead"
+        template="templates/head.pt"
+        layer="*"
+        permission="zope2.View"
+        />
+
+
     <browser:page
         for="*"
         class=".auth.AuthTokenView"

@@ -16,6 +16,15 @@ module.exports = function(grunt) {
         }
       }
     },
+    uglify: {
+      'default': {
+        files: {
+          'firebaseplonedemo/static/dist/angular.min.js': [
+            collect.bower('angular').path('angular.js')
+          ]
+        }
+      }
+    },
     watch: {
       options: {
         debounceDelay: 250
@@ -25,16 +34,17 @@ module.exports = function(grunt) {
           collect.bower('angular').path('angular.js'),
           collect.bower('angularFire').path('angularFire.js')
         ],
-        tasks: ['copy:default']
+        tasks: ['copy:default', 'uglify:default']
       }
     }
   });
 
   // Load the task plugins.
   grunt.loadNpmTasks('grunt-contrib-copy');
+  grunt.loadNpmTasks('grunt-contrib-uglify');
   grunt.loadNpmTasks('grunt-contrib-watch');
 
   // Default task(s).
-  grunt.registerTask('default', ['copy:default']);
+  grunt.registerTask('default', ['copy:default', 'uglify:default']);
 
 };

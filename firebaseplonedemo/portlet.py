@@ -97,7 +97,7 @@ class Renderer(base.Renderer):
     of this class. Other methods can be added and referenced in the template.
     """
 
-    render = ViewPageTemplateFile('portlet.pt')
+    render = ViewPageTemplateFile('templates/portlet.pt')
 
     def css_class(self):
         """Generate a CSS class from the portlet header
