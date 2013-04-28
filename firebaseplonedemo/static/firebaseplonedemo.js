@@ -24,7 +24,7 @@ controller('Chat', ['$scope', '$timeout', 'angularFireCollection',
                     $scope.username = ploneUsername;
                 }
 
-                var el = document.getElementById("messagesDiv");
+                var el = document.getElementById("chat-messages");
                 $scope.messages = angularFireCollection(url + '/messages', function() {
                     $timeout(function () {
                         el.scrollTop = el.scrollHeight;

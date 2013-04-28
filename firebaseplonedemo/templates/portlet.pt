@@ -16,10 +16,11 @@
 
         <div ng-controller="Chat">
           <div>
-            <label for="">Your name: </label><input type="text" ng-model="username">
+            <label for="">Your name: </label>
+            <input class="chat-nameinput" type="text" ng-model="username">
           </div>
           <p></p>
-          <div id="messagesDiv" class="messagesDiv" style="height:500px; overflow: auto;">
+          <div id="chat-messages" class="chat-messages" >
             <div ng-cloak ng-repeat="message in messages"
                  class="chat-line-{{{true: 'own', false: 'foreign'}[message.from == username]}}">
               <div class="chat-sender">{{message.from}}:</div>
@@ -27,8 +28,8 @@
             </div>
           </div>
           <form ng-submit="addMessage()">
-            <input type="text" ng-model="message" placeholder="Message...">
-            <input type="submit" id="submit" value="Send" style="font-size:24px;">
+            <input type="text" class="chat-msginput" ng-model="message" placeholder="Message...">
+            <input type="submit" class="chat-sendbutton" value="Send">
           </form>
         </div>
 

@@ -1,4 +1,17 @@
 
+.portlet-firebaseplonedemo .chat-messages {
+    height:500px;
+    overflow: auto;
+}
+
+.portlet-firebaseplonedemo .chat-nameinput {
+    width: 120px;
+}
+
+.portlet-firebaseplonedemo .chat-msginput {
+    width: 120px;
+}
+
 .portlet-firebaseplonedemo .chat-sender {
     clear: both;
     width: 100%;
@@ -54,6 +67,23 @@
     background-image: -o-linear-gradient(top, #e4ceed, #bc84d1);
     background-image: linear-gradient(#e4ceed, #bc84d1);
     border-color: #bc84d1 #bc84d1 hsl(284, 46%, 62%);
+    color: #333 !important;
+    text-shadow: 0 1px 1px rgba(255, 255, 255, 0.33);
+    -webkit-font-smoothing: antialiased;
+}
+
+.portlet-firebaseplonedemo .chat-sendbutton {
+    background-color: hsl(284, 0%, 80%) !important;
+    background-repeat: repeat-x;
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#ffffff", endColorstr="#cccccc");
+    background-image: -khtml-gradient(linear, left top, left bottom, from(#ffffff), to(#cccccc));
+    background-image: -moz-linear-gradient(top, #ffffff, #cccccc);
+    background-image: -ms-linear-gradient(top, #ffffff, #cccccc);
+    background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #ffffff), color-stop(100%, #cccccc));
+    background-image: -webkit-linear-gradient(top, #ffffff, #cccccc);
+    background-image: -o-linear-gradient(top, #ffffff, #cccccc);
+    background-image: linear-gradient(#ffffff, #cccccc);
+    border-color: #cccccc #cccccc hsl(284, 0%, 75%);
     color: #333 !important;
     text-shadow: 0 1px 1px rgba(255, 255, 255, 0.33);
     -webkit-font-smoothing: antialiased;
