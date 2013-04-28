@@ -1,8 +1,4 @@
-<div tal:condition="view/data/omit_border"
-     tal:attributes="class string:portlet-firebaseplonedemo ${view/css_class}"
-     tal:content="structure view/transformed" />
-<dl tal:condition="not:view/data/omit_border"
-    i18n:domain="plone"
+<dl i18n:domain="plone"
     ng-app="chat"
     tal:attributes="class string:portlet portlet-firebaseplonedemo ${view/css_class};
       ng-init string:firebase_url = '${view/data/firebase_url}';; auth_token = '${view/auth_token}'"
