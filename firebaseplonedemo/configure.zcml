@@ -48,14 +48,6 @@
         />
 
 
-    <browser:page
-        for="*"
-        class=".auth.AuthTokenView"
-        name="gen_auth_token"
-        permission="zope.Public"
-   />
-
-
 </configure>
 
 

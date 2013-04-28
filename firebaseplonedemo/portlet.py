@@ -1,19 +1,17 @@
 import re
 import logging
+from firebase_token_generator import create_token
 
-from plone.i18n.normalizer.interfaces import IIDNormalizer
-from plone.portlets.interfaces import IPortletDataProvider
-from plone.app.form.widgets.wysiwygwidget import WYSIWYGWidget
-from plone.app.portlets.portlets import base
 from zope import schema
 from zope.interface import implements
 from zope.component import getUtility
 from zope.formlib import form
-
-from Acquisition import aq_inner
-from Products.CMFCore.utils import getToolByName
+from zope.component import getMultiAdapter
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
-
+from plone.i18n.normalizer.interfaces import IIDNormalizer
+from plone.portlets.interfaces import IPortletDataProvider
+# from plone.app.form.widgets.wysiwygwidget import WYSIWYGWidget
+from plone.app.portlets.portlets import base
 from plone.portlet.static import PloneMessageFactory as _
 
 logger = logging.getLogger('firebaseplonedemo.portlet.FireBasePloneDemo')
@@ -33,27 +31,16 @@ class IFireBasePloneDemoPortlet(IPortletDataProvider):
         constraint=re.compile("[^\s]").match,
         required=False)
 
-    text = schema.Text(
-        title=_(u"Text"),
-        description=_(u"The text to render"),
+    firebase_url = schema.TextLine(
+        title=_(u"FireBase url"),
+        description=_(u"The service url for your FireBase connection"),
+        constraint=re.compile("[^\s]").match,
         required=True)
 
-    omit_border = schema.Bool(
-        title=_(u"Omit portlet border"),
-        description=_(u"Tick this box if you want to render the text above "
-            "without the standard header, border or footer."),
-        required=True,
-        default=False)
-
-    footer = schema.TextLine(
-        title=_(u"Portlet footer"),
-        description=_(u"Text to be shown in the footer"),
-        required=False)
-
-    more_url = schema.ASCIILine(
-        title=_(u"Details link"),
-        description=_(u"If given, the header and footer "
-            "will link to this URL."),
+    firebase_secret = schema.TextLine(
+        title=_(u"FireBase secret"),
+        description=_(u"The secret used to authenticate to your FireBase"),
+        constraint=re.compile("[^\s]").match,
         required=False)
 
 
@@ -67,18 +54,13 @@ class Assignment(base.Assignment):
     implements(IFireBasePloneDemoPortlet)
 
     header = _(u"title_firebaseplonedemo_portlet", default=u"FireBasePloneDemo portlet")
-    text = u""
-    omit_border = False
-    footer = u""
-    more_url = ''
+    firebase_url = u''
+    firebase_secret = u''
 
-    def __init__(self, header=u"", text=u"", omit_border=False, footer=u"",
-                 more_url=''):
+    def __init__(self, header=u'', firebase_url=u'', firebase_secret=u''):
         self.header = header
-        self.text = text
-        self.omit_border = omit_border
-        self.footer = footer
-        self.more_url = more_url
+        self.firebase_url = firebase_url
+        self.firebase_secret = firebase_secret
 
     @property
     def title(self):
@@ -108,11 +90,25 @@ class Renderer(base.Renderer):
             return "portlet-firebaseplonedemo-%s" % normalizer.normalize(header)
         return "portlet-firebaseplonedemo"
 
-    def has_link(self):
-        return bool(self.data.more_url)
+    @property
+    def auth_token(self):
+        portal_state = getMultiAdapter((self.context, self.request), name="plone_portal_state")
+        plone_userid = portal_state.member().getId()
+        if plone_userid is None:
+            plone_username = 'Anonymous'
+        else:
+            plone_username = plone_userid
 
-    def has_footer(self):
-        return bool(self.data.footer)
+        admin = False
+
+        custom_data = {
+            'ploneUserid': plone_userid,
+            'ploneUsername': plone_username,
+        }
+        options = {'admin': admin}
+
+        token = create_token(self.data.firebase_secret, custom_data, options)
+        return token
 
 
 class AddForm(base.AddForm):
@@ -123,10 +119,10 @@ class AddForm(base.AddForm):
     constructs the assignment that is being added.
     """
     form_fields = form.Fields(IFireBasePloneDemoPortlet)
-    form_fields['text'].custom_widget = WYSIWYGWidget
+    ##form_fields['text'].custom_widget = WYSIWYGWidget
     label = _(u"title_add_firebaseplonedemo_portlet", default=u"Add FireBasePloneDemo portlet")
     description = _(u"description_firebaseplonedemo_portlet",
-        default=u"A portlet which can display static HTML text.")
+                    default=u"A portlet to show FireBase in Plone, a Demo.")
 
     def create(self, data):
         return Assignment(**data)
@@ -139,7 +135,7 @@ class EditForm(base.EditForm):
     zope.formlib which fields to display.
     """
     form_fields = form.Fields(IFireBasePloneDemoPortlet)
-    form_fields['text'].custom_widget = WYSIWYGWidget
+    #form_fields['text'].custom_widget = WYSIWYGWidget
     label = _(u"title_edit_firebaseplonedemo_portlet", default=u"Edit FireBasePloneDemo portlet")
     description = _(u"description_firebaseplonedemo_portlet",
-        default=u"A portlet which can display static HTML text.")
+                    default=u"A portlet to show FireBase in Plone, a Demo.")

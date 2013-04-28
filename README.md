@@ -1,4 +1,4 @@
 
 # FireBase PloneDemo #
 
-A Chat Portlet.
+A chat portlet.
