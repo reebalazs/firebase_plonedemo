@@ -31,6 +31,10 @@ app.controller('PollController', ['$scope', 'angularFire',
                         .removeClass('submitting');
                 };
 
+                $scope.removeChoice = function (choice) {
+                    $scope.choices.splice($scope.choices.indexOf(choice), 1);
+                };
+
             }
         );
     }
@@ -46,8 +50,6 @@ app.directive('contenteditable', function () {
             elm.bind('blur', function () {
                 scope.$apply(function () {
                     ctrl.$setViewValue(elm.html());
-                    // Need explicit apply. XXX This should be done differently.
-                    scope.choices.update(scope.choice);
                 });
             });
 
