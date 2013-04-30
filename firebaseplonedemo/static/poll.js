@@ -36,3 +36,25 @@ app.controller('PollController', ['$scope', '$timeout', 'angularFireCollection',
     }
 
 ]);
+
+
+app.directive('contenteditable', function () {
+    return {
+        require: 'ngModel',
+        link: function (scope, elm, attrs, ctrl) {
+            // view -> model
+            elm.bind('blur', function () {
+                scope.$apply(function () {
+                    ctrl.$setViewValue(elm.html());
+                    // Need explicit apply. XXX This should be done differently.
+                    scope.choices.update(scope.choice);
+                });
+            });
+
+            // model -> view
+            ctrl.$render = function () {
+                elm.html(ctrl.$viewValue);
+            };
+        }
+    };
+});

@@ -13,14 +13,25 @@
         <span class="portletTopRight"></span>
     </dt>
     <dd class="portletItem odd" ng-controller="PollController">
-        <div class="poll-choices" >
-          <div ng-cloak ng-repeat="choice in choices">
-            <div class="poll-text">{{choice.label}}</div>
+        <div class="poll-editing-wrapper">
+          <div ng-cloak ng-repeat="choice in choices"
+               class="poll-editing" contenteditable ng-model="choice.label">
+            {{choice.label}}
           </div>
         </div>
         <form ng-submit="addChoice()">
           <input type="submit" class="poll-addbutton" value="Add">
         </form>
+
+        <div class="poll-voting-wrapper" >
+          <div class="poll-voting" 
+            ng-cloak ng-repeat="choice in choices"
+            ng-click="choice.count = choice.count + 1"
+            >
+            <span class="poll-text">{{choice.label}}</span>
+            <span class="poll-counter">{{choice.count}}</span>
+          </div>
+        </div>
         <tal:corners>
             <span class="portletBottomLeft"></span>
             <span class="portletBottomRight"></span>
