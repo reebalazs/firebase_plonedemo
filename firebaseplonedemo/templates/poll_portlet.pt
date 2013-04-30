@@ -1,7 +1,7 @@
 <tal:define tal:define="root_id view/unique_id">
 
   <dl i18n:domain="plone"
-    tal:attributes="class string:portlet portlet-firebaseplonedemo ${view/css_class};
+    tal:attributes="class string:portlet portlet-firebase-chat ${view/css_class};
       id root_id;
       ng-init string:firebase_url = '${view/data/firebase_url}';; auth_token = '${view/auth_token}';; root_id = '${root_id}'"
     >
@@ -12,36 +12,22 @@
         <span tal:content="header"></span>
         <span class="portletTopRight"></span>
     </dt>
-
-    <dd class="portletItem odd" ng-controller="ChatController">
-
-        <div>
-
-          <label for="">Your name: </label>
-          <input class="chat-nameinput" type="text" ng-model="username">
-        </div>
-        <p></p>
-        <div class="chat-messages" >
-          <div ng-cloak ng-repeat="message in messages"
-               class="chat-line-{{{true: 'own', false: 'foreign'}[message.from == username]}}">
-            <div class="chat-sender">{{message.from}}:</div>
-            <div class="chat-content">{{message.content}}</div>
+    <dd class="portletItem odd" ng-controller="PollController">
+        <div class="poll-choices" >
+          <div ng-cloak ng-repeat="choice in choices">
+            <div class="poll-text">{{choice.label}}</div>
           </div>
         </div>
-        <form ng-submit="addMessage()">
-          <input type="text" class="chat-msginput" ng-model="message" placeholder="Message...">
-          <input type="submit" class="chat-sendbutton" value="Send">
+        <form ng-submit="addChoice()">
+          <input type="submit" class="poll-addbutton" value="Add">
         </form>
-
         <tal:corners>
             <span class="portletBottomLeft"></span>
             <span class="portletBottomRight"></span>
         </tal:corners>
-
     </dd>
-
   </dl>
   <script type="text/javascript"
-    tal:content="string:angular.bootstrap(document.getElementById('${root_id}'), ['chat'])"
+    tal:content="string:angular.bootstrap(document.getElementById('${root_id}'), ['poll'])"
     ></script>
 </tal:define>
