@@ -120,14 +120,19 @@ class Renderer(base.Renderer):
         data['ploneUsername'] = username
 
     @property
-    def auth_token(self):
+    def auth_data(self):
         portal_state = getMultiAdapter((self.context, self.request), name="plone_portal_state")
         plone_userid = portal_state.member().getId()
-        admin = False
         custom_data = {
             'ploneUserid': plone_userid,
         }
         self.extend_data(custom_data)
+        return custom_data
+
+    @property
+    def auth_token(self):
+        custom_data = self.auth_data
+        admin = False
         options = {'admin': admin}
         token = create_token(self.data.firebase_secret, custom_data, options)
         return token

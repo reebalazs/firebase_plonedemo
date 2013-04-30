@@ -7,18 +7,16 @@ app.controller('ChatController', ['$scope', '$timeout', 'angularFireCollection',
         var url = $scope.firebase_url;
         var authToken = $scope.auth_token;
         var $root = angular.element('#' + $scope.root_id);
-        //$scope.username = auth.ploneUsername;
-        $scope.username = 'some user';
         var el = $root.find('.chat-messages')[0];
+        $scope.username = $scope.plone_username;
 
         // Log me in.
         var dataRef = new Firebase(url);
-        dataRef.auth(authToken, function(error) {
+        dataRef.auth(authToken, function(error, result) {
             if (error) {
                 throw new Error("Login Failed! \n" + error);
             }
         });
-
 
         $scope.messages = angularFireCollection(url + '/messages', function() {
             $timeout(function () {
