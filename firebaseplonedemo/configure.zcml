@@ -20,18 +20,6 @@
        id="firebaseplonedemo.portlet.AddFireBasePloneDemoPortlet"
        title="firebaseplonedemo: Add FireBasePloneDemo portlet"
        />
- 
-     <!-- Register the portlet -->
-     <plone:portlet
-         name="firebaseplonedemo.portlet.FireBasePloneDemo"
-         interface=".portlet.IFireBasePloneDemoPortlet"
-         assignment=".portlet.Assignment"
-         view_permission="zope2.View"
-         edit_permission="firebaseplonedemo.portlet.AddFireBasePloneDemoPortlet"
-         renderer=".portlet.Renderer"
-         addview=".portlet.AddForm"
-         editview=".portlet.EditForm"
-         />
 
     <browser:resourceDirectory
         name="firebaseplonedemo"
@@ -46,8 +34,30 @@
         layer="*"
         permission="zope2.View"
         />
+ 
 
+     <!-- Register the portlets -->
+
+     <plone:portlet
+         name="firebaseplonedemo.portlet.FireBasePloneDemo"
+         interface=".portlet.IFireBasePloneDemoPortlet"
+         assignment=".portlet.Assignment"
+         view_permission="zope2.View"
+         edit_permission="firebaseplonedemo.portlet.AddFireBasePloneDemoPortlet"
+         renderer=".portlet.Renderer"
+         addview=".portlet.AddForm"
+         editview=".portlet.EditForm"
+         />
+
+    <plone:portlet
+         name="firebaseplonedemo.portlet.poll"
+         interface=".poll_portlet.IFireBasePollPortlet"
+         assignment=".portlet.Assignment"
+         view_permission="zope2.View"
+         edit_permission="firebaseplonedemo.portlet.AddFireBasePloneDemoPortlet"
+         renderer=".poll_portlet.Renderer"
+         addview=".portlet.AddForm"
+         editview=".portlet.EditForm"
+         />
 
 </configure>
-
-

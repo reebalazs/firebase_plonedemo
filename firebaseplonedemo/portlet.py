@@ -1,5 +1,6 @@
 import re
 import logging
+import random
 from firebase_token_generator import create_token
 
 from zope import schema
@@ -98,23 +99,35 @@ class Renderer(base.Renderer):
         self.request.firebaseplonedemo_next_id += 1
         return unique_id
 
+    USERNAME_COOKIE = '__firebaseplone_chat_username'
+
+    #def extend_data(self, data):
+    #    pass
+
+    def extend_data(self, data):
+        # Do we have a cookie?
+        username = self.request.cookies.get(self.USERNAME_COOKIE, None)
+        if username is None:
+            username = data['ploneUserid']
+            if username is None:
+                # Let's give the user a name, that we later remember.
+                rnd = random.randrange(100)
+                username = 'Anonymous%i' % (rnd, )
+                self.request.response.setCookie(self.USERNAME_COOKIE, username, {
+                    'path': '/',
+                })
+        data['ploneUsername'] = username
+
     @property
     def auth_token(self):
         portal_state = getMultiAdapter((self.context, self.request), name="plone_portal_state")
         plone_userid = portal_state.member().getId()
-        if plone_userid is None:
-            plone_username = 'Anonymous'
-        else:
-            plone_username = plone_userid
-
         admin = False
-
         custom_data = {
             'ploneUserid': plone_userid,
-            'ploneUsername': plone_username,
         }
+        self.extend_data(custom_data)
         options = {'admin': admin}
-
         token = create_token(self.data.firebase_secret, custom_data, options)
         return token
 
