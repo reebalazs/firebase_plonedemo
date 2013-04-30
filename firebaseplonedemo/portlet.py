@@ -94,9 +94,10 @@ class Renderer(base.Renderer):
     def unique_id(self):
         """Generate a unique id within the request
         """
-        next_id = self.request.firebaseplonedemo_next_id = getattr(self.request, 'next_id', 0)
-        unique_id = "portlet-firebaseplonedemo-id-%04i" % (next_id, )
-        self.request.firebaseplonedemo_next_id += 1
+        next_id = self.request.firebase_plonedemo_next_id = \
+            getattr(self.request, 'firebase_plonedemo_next_id', 0)
+        unique_id = "portlet-firebase-poll-id-%04i" % (next_id, )
+        self.request.firebase_plonedemo_next_id += 1
         return unique_id
 
     USERNAME_COOKIE = '__firebaseplone_chat_username'

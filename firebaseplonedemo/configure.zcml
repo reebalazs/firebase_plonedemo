@@ -52,12 +52,12 @@
     <plone:portlet
          name="firebaseplonedemo.portlet.poll"
          interface=".poll_portlet.IFireBasePollPortlet"
-         assignment=".portlet.Assignment"
+         assignment=".poll_portlet.Assignment"
          view_permission="zope2.View"
          edit_permission="firebaseplonedemo.portlet.AddFireBasePloneDemoPortlet"
          renderer=".poll_portlet.Renderer"
-         addview=".portlet.AddForm"
-         editview=".portlet.EditForm"
+         addview=".poll_portlet.AddForm"
+         editview=".poll_portlet.EditForm"
          />
 
 </configure>

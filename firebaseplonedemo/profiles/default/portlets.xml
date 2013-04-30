@@ -14,7 +14,7 @@
     />
 
   <portlet
-    addview="firebaseplonedemo.portlet.FireBasePloneDemo"
+    addview="firebaseplonedemo.portlet.poll"
     title="FireBase poll portlet"
     description="A poll portlet"
     i18n:attributes="title;
