@@ -21,7 +21,8 @@ app.controller('ChatController', ['$scope', '$timeout', 'angularFireCollection',
 
                 $scope.username = auth.ploneUsername;
 
-                var el = $root.find('.chat-messages');
+                var el = $root.find('.chat-messages')[0];
+
                 $scope.messages = angularFireCollection(url + '/messages', function() {
                     $timeout(function () {
                         el.scrollTop = el.scrollHeight;
@@ -44,7 +45,6 @@ app.controller('ChatController', ['$scope', '$timeout', 'angularFireCollection',
                     // save this to a cookie
                     document.cookie = $scope.USERNAME_COOKIE +
                         "=" + escape($scope.username) + "; path=/";
-                    console.log('XXXX', $scope.username);
                 };
 
 
