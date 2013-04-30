@@ -1,13 +1,13 @@
 
-angular.module('chat', ['firebase']).
-controller('Chat', ['$scope', '$timeout', 'angularFireCollection',
+var app = angular.module('chat', ['firebase']);
+
+app.controller('ChatController', ['$scope', '$timeout', 'angularFireCollection',
     function($scope, $timeout, angularFireCollection) {
 
         var url = $scope.firebase_url;
         var authToken = $scope.auth_token;
 
         // Log me in.
-        // Each user logs in to /users/<username>/tasks.
         var dataRef = new Firebase(url);
 
         dataRef.auth(authToken, function(error, result) {
@@ -50,4 +50,3 @@ controller('Chat', ['$scope', '$timeout', 'angularFireCollection',
 
     }
 ]);
-

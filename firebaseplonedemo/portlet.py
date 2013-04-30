@@ -78,7 +78,6 @@ class Renderer(base.Renderer):
     rendered, and the implicit variable 'view' will refer to an instance
     of this class. Other methods can be added and referenced in the template.
     """
-
     render = ViewPageTemplateFile('templates/portlet.pt')
 
     def css_class(self):
@@ -89,6 +88,15 @@ class Renderer(base.Renderer):
             normalizer = getUtility(IIDNormalizer)
             return "portlet-firebaseplonedemo-%s" % normalizer.normalize(header)
         return "portlet-firebaseplonedemo"
+
+    @property
+    def unique_id(self):
+        """Generate a unique id within the request
+        """
+        next_id = self.request.firebaseplonedemo_next_id = getattr(self.request, 'next_id', 0)
+        unique_id = "portlet-firebaseplonedemo-id-%04i" % (next_id, )
+        self.request.firebaseplonedemo_next_id += 1
+        return unique_id
 
     @property
     def auth_token(self):

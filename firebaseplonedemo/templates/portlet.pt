@@ -1,6 +1,8 @@
-<dl i18n:domain="plone"
-    ng-app="chat"
+<tal:define tal:define="root_id view/unique_id">
+
+  <dl i18n:domain="plone"
     tal:attributes="class string:portlet portlet-firebaseplonedemo ${view/css_class};
+      id root_id;
       ng-init string:firebase_url = '${view/data/firebase_url}';; auth_token = '${view/auth_token}'"
     >
 
@@ -12,26 +14,24 @@
         <span class="portletTopRight"></span>
     </dt>
 
-    <dd class="portletItem odd">
+    <dd class="portletItem odd" ng-controller="ChatController">
 
-        <div ng-controller="Chat">
-          <div>
-            <label for="">Your name: </label>
-            <input class="chat-nameinput" type="text" ng-model="username">
-          </div>
-          <p></p>
-          <div id="chat-messages" class="chat-messages" >
-            <div ng-cloak ng-repeat="message in messages"
-                 class="chat-line-{{{true: 'own', false: 'foreign'}[message.from == username]}}">
-              <div class="chat-sender">{{message.from}}:</div>
-              <div class="chat-content">{{message.content}}</div>
-            </div>
-          </div>
-          <form ng-submit="addMessage()">
-            <input type="text" class="chat-msginput" ng-model="message" placeholder="Message...">
-            <input type="submit" class="chat-sendbutton" value="Send">
-          </form>
+        <div>
+          <label for="">Your name: </label>
+          <input class="chat-nameinput" type="text" ng-model="username">
         </div>
+        <p></p>
+        <div id="chat-messages" class="chat-messages" >
+          <div ng-cloak ng-repeat="message in messages"
+               class="chat-line-{{{true: 'own', false: 'foreign'}[message.from == username]}}">
+            <div class="chat-sender">{{message.from}}:</div>
+            <div class="chat-content">{{message.content}}</div>
+          </div>
+        </div>
+        <form ng-submit="addMessage()">
+          <input type="text" class="chat-msginput" ng-model="message" placeholder="Message...">
+          <input type="submit" class="chat-sendbutton" value="Send">
+        </form>
 
         <tal:corners>
             <span class="portletBottomLeft"></span>
@@ -40,4 +40,8 @@
 
     </dd>
 
-</dl>
+  </dl>
+  <script type="text/javascript"
+    tal:content="string:angular.bootstrap(document.getElementById('${root_id}'), ['chat'])"
+    ></script>
+</tal:define>
