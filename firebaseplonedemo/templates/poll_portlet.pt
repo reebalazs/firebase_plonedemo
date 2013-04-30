@@ -17,7 +17,7 @@
 
         <div class="poll-voting-wrapper" >
           <div class="poll-voting" 
-            ng-cloak ng-repeat="choice in choices"
+            ng-cloak ng-repeat="choice in choices  | orderBy:'count':true"
             ng-click="choice.count = choice.count + 1"
             >
             <span class="poll-text">{{choice.label}}</span>
