@@ -24,26 +24,28 @@
             <span class="poll-counter">{{choice.count}}</span>
           </button>
         </div>
-
-        <br><br>
-
-        <div class="poll-editing-wrapper">
-          <span class="poll-editing-label">Edit the available choices:</span>
-          <div class="poll-editing-list">
-            <div ng-cloak ng-repeat="choice in choices"
-                 class="poll-editing">
-              <a ng-click="removeChoice(choice)" href class="poll-editing-remove">(X)</a>
-              <span class="poll-editing-text" contenteditable ng-model="choice.label"
-                    placeholder="Customize choice text...">
-                {{choice.label}}
-              </span>
+        <div class="poll-editing-wrapper" ng-switch="editMode">
+          <a href ng-click="setEditMode(true)" ng-switch-when="false">
+            Edit the available choices...
+          <a>
+          <div ng-switch-when="true">
+            <span class="poll-editing-label">Edit the available choices:</span>
+            <a href class="poll-editing-remove" ng-click="setEditMode(false)">(X)</a>
+            <div class="poll-editing-list">
+              <div ng-cloak ng-repeat="choice in choices"
+                   class="poll-editing">
+                <a ng-click="removeChoice(choice)" href class="poll-editing-remove">(X)</a>
+                <span class="poll-editing-text" contenteditable ng-model="choice.label"
+                      placeholder="Customize choice text...">
+                  {{choice.label}}
+                </span>
+              </div>
+              <form ng-submit="addChoice()">
+                <input type="submit" class="poll-addbutton" value="Add">
+              </form>
             </div>
-            <form ng-submit="addChoice()">
-              <input type="submit" class="poll-addbutton" value="Add">
-            </form>
           </div>
         </div>
-
         <tal:corners>
             <span class="portletBottomLeft"></span>
             <span class="portletBottomRight"></span>

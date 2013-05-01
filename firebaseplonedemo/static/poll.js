@@ -4,10 +4,6 @@ var app = angular.module('poll', ['firebase']);
 app.controller('PollController', ['$scope', 'angularFire',
     function($scope, angularFire) {
 
-        var $root = angular.element('#' + $scope.root_id);
-        var el = $root.find('.poll-choices')[0];
-        $scope.username = $scope.plone_username;
-
         // Log me in.
         var dataRef = new Firebase($scope.firebase_url);
         dataRef.auth($scope.auth_token, function(error, result) {
@@ -19,6 +15,15 @@ app.controller('PollController', ['$scope', 'angularFire',
         //
         angularFire($scope.firebase_url + '/choices', $scope, 'choices', [])
             .then(function () {
+
+                var $root = angular.element('#' + $scope.root_id);
+                var el = $root.find('.poll-choices')[0];
+                $scope.username = $scope.plone_username;
+                $scope.editMode = false;
+
+                $scope.setEditMode = function(mode) {
+                    $scope.editMode = mode;
+                };
 
                 $scope.addChoice = function () {
                     $scope.choices.push({

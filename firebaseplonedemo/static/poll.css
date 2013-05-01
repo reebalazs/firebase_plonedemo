@@ -42,6 +42,18 @@
     -webkit-font-smoothing: antialiased;
 }
 
+.portlet-firebase-chat .poll-counter {
+    color: #afffaf;
+}
+
+.portlet-firebase-chat .poll-editing-list {
+    margin-top: 1em;
+}
+
+.portlet-firebase-chat .poll-editing-wrapper {
+    margin-top: 1em;
+}
+
 .portlet-firebase-chat .poll-editing {
     margin: 0.25em 0;
 }
