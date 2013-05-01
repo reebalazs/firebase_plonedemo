@@ -7,10 +7,6 @@
     -webkit-border-radius: 10px;
     -moz-border-radius:10px;
     border-radius: 10px;
-    transition: all ease 0.2s;
-    -moz-transition: all ease 0.2s;
-    -webkit-transition: all ease 0.2s;
-    -o-transition: all ease 0.2s;
     /* */
     background-color: hsl(207, 77%, 12%) !important;
     background-repeat: repeat-x;
@@ -23,12 +19,25 @@
     background-image: -o-linear-gradient(top, #6eb3ec, #072036);
     background-image: linear-gradient(#6eb3ec, #072036);
     border-color: #072036 #072036 hsl(207, 77%, -2%);
-    color: #d8d8d8 !important;
+    color: #fff !important;
     text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.92);
     -webkit-font-smoothing: antialiased;
 }
 
 .portlet-firebase-chat .poll-voting:hover {
-    color: #ffffcf !important;
     cursor: pointer;
+    background-color: hsl(207, 100%, 24%) !important;
+    background-repeat: repeat-x;
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#1e9aff", endColorstr="#00437a");
+    background-image: -khtml-gradient(linear, left top, left bottom, from(#1e9aff), to(#00437a));
+    background-image: -moz-linear-gradient(top, #1e9aff, #00437a);
+    background-image: -ms-linear-gradient(top, #1e9aff, #00437a);
+    background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #1e9aff), color-stop(100%, #00437a));
+    background-image: -webkit-linear-gradient(top, #1e9aff, #00437a);
+    background-image: -o-linear-gradient(top, #1e9aff, #00437a);
+    background-image: linear-gradient(#1e9aff, #00437a);
+    border-color: #00437a #00437a hsl(207, 100%, 16%);
+    color: #fff !important;
+    text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.52);
+    -webkit-font-smoothing: antialiased;
 }
