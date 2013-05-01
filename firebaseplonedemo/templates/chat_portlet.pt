@@ -17,9 +17,11 @@
     <dd class="portletItem odd" ng-controller="ChatController">
 
         <div>
-          <label for="">Your name: </label>
-          <input class="chat-nameinput" type="text"
-                 ng-model="username" ng-change="updateUsername()">
+          <label class="chat-namelabel" for="">Your name:</label>
+          <span class="chat-nameinput">
+            <input type="text"
+                   ng-model="username" ng-change="updateUsername()">
+          </span>
         </div>
         <p></p>
         <div class="chat-messages" >
@@ -30,8 +32,8 @@
           </div>
         </div>
         <form ng-submit="addMessage()">
-          <input type="text" class="chat-msginput" ng-model="message" placeholder="Message...">
-          <input type="submit" class="chat-sendbutton" value="Send">
+          <button class="chat-sendbutton">Send</button>
+          <span class="chat-msginput"><input type="text"  ng-model="message" placeholder="Message..."></span>
         </form>
 
         <tal:corners>
