@@ -40,13 +40,13 @@
 
      <plone:portlet
          name="firebaseplonedemo.portlet.FireBasePloneDemo"
-         interface=".portlet.IFireBasePloneDemoPortlet"
-         assignment=".portlet.Assignment"
+         interface=".chat_portlet.IFireBasePloneDemoPortlet"
+         assignment=".chat_portlet.Assignment"
          view_permission="zope2.View"
          edit_permission="firebaseplonedemo.portlet.AddFireBasePloneDemoPortlet"
-         renderer=".portlet.Renderer"
-         addview=".portlet.AddForm"
-         editview=".portlet.EditForm"
+         renderer=".chat_portlet.Renderer"
+         addview=".chat_portlet.AddForm"
+         editview=".chat_portlet.EditForm"
          />
 
     <plone:portlet

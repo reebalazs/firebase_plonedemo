@@ -79,7 +79,7 @@ class Renderer(base.Renderer):
     rendered, and the implicit variable 'view' will refer to an instance
     of this class. Other methods can be added and referenced in the template.
     """
-    render = ViewPageTemplateFile('templates/portlet.pt')
+    render = ViewPageTemplateFile('templates/poll_portlet.pt')
 
     def css_class(self):
         """Generate a CSS class from the portlet header
