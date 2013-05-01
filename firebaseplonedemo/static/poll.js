@@ -22,7 +22,7 @@ app.controller('PollController', ['$scope', 'angularFire',
 
                 $scope.addChoice = function () {
                     $scope.choices.push({
-                        label: 'Customize choice text...',
+                        label: '',
                         count: 0
                     });
 
@@ -35,28 +35,53 @@ app.controller('PollController', ['$scope', 'angularFire',
                     $scope.choices.splice($scope.choices.indexOf(choice), 1);
                 };
 
+                $scope.hasLabel = function (item){
+                    return item.label;
+                };
+
             }
         );
     }
 
 ]);
 
-
 app.directive('contenteditable', function () {
+    var placeholder_pre =  '<span class="contenteditable-placeholder">';
+    var placeholder_txt = 'Enter text here...';
+    var placeholder_post = '</span>';
     return {
         require: 'ngModel',
         link: function (scope, elm, attrs, ctrl) {
-            // view -> model
-            elm.bind('blur', function () {
-                scope.$apply(function () {
-                    ctrl.$setViewValue(elm.html());
-                });
+            // entering edit mode
+            elm.bind('click', function () {
+                if (elm.data('isPlaceholder')) {
+                    elm.html('');
+                }
             });
 
             // model -> view
             ctrl.$render = function () {
-                elm.html(ctrl.$viewValue);
+                var input = ctrl.$viewValue;
+                var placeholder = false;
+                if (!input) {
+                    input = placeholder_pre +
+                        (elm.attr('placeholder') || placeholder_txt) +
+                        placeholder_post;
+                    placeholder = true;
+                }
+                elm.html(input);
+                elm.data('isPlaceholder', placeholder);
             };
+
+            // view -> model
+            elm.bind('blur', function () {
+                scope.$apply(function () {
+                    ctrl.$setViewValue(elm.html());
+                    // put back the placeholder if necessary
+                    ctrl.$render();
+                });
+            });
+
         }
     };
 });

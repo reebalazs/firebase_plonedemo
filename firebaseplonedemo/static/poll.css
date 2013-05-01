@@ -41,3 +41,33 @@
     text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.52);
     -webkit-font-smoothing: antialiased;
 }
+
+.portlet-firebase-chat .poll-editing {
+    margin: 0.25em 0;
+}
+
+.portlet-firebase-chat .poll-editing:after {
+    content: ".";
+    display: block;
+    height: 0;
+    clear: both;
+    visibility: hidden;
+}
+
+.portlet-firebase-chat a.poll-editing-remove {
+    float: left;
+    margin-right: 0.25em;
+    border-bottom: 0 !important;
+}
+
+.portlet-firebase-chat .poll-editing-text {
+    float: left;
+}
+
+.portlet-firebase-chat .poll-editing-text:hover {
+    background-color: #ffffb0;
+}
+
+.portlet-firebase-chat .contenteditable-placeholder {
+    color: #a0a0a0;
+}

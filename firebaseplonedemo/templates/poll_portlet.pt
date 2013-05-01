@@ -17,7 +17,7 @@
 
         <div class="poll-voting-wrapper" >
           <button class="poll-voting" 
-            ng-cloak ng-repeat="choice in choices  | orderBy:'count':true"
+            ng-cloak ng-repeat="choice in choices | filter: hasLabel | orderBy:'count':true"
             ng-click="choice.count = choice.count + 1"
             >
             <span class="poll-text">{{choice.label}}</span>
@@ -29,11 +29,12 @@
 
         <div class="poll-editing-wrapper">
           <span class="poll-editing-label">Edit the available choices:</span>
-          <div class="poll-editing-wrapper">
+          <div class="poll-editing-list">
             <div ng-cloak ng-repeat="choice in choices"
                  class="poll-editing">
-              <a ng-click="removeChoice(choice)" href="#" class="poll-editing-remove">(X)</a>
-              <span class="poll-editing-text" contenteditable ng-model="choice.label">
+              <a ng-click="removeChoice(choice)" href class="poll-editing-remove">(X)</a>
+              <span class="poll-editing-text" contenteditable ng-model="choice.label"
+                    placeholder="Customize choice text...">
                 {{choice.label}}
               </span>
             </div>
