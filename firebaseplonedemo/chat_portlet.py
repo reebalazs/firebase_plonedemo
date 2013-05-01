@@ -69,7 +69,7 @@ class Assignment(base.Assignment):
         "manage portlets" screen. Here, we use the title that the user gave or
         static string if title not defined.
         """
-        return self.header or _(u'portlet_firebaseplonedemo', default=u"FireBase PloneDemo Portlet")
+        return self.header or _(u'portlet_firebaseplonedemo', default=u"FireBase chat Portlet")
 
 
 class Renderer(base.Renderer):
@@ -147,9 +147,9 @@ class AddForm(base.AddForm):
     """
     form_fields = form.Fields(IFireBasePloneDemoPortlet)
     ##form_fields['text'].custom_widget = WYSIWYGWidget
-    label = _(u"title_add_firebaseplonedemo_portlet", default=u"Add FireBasePloneDemo portlet")
-    description = _(u"description_firebaseplonedemo_portlet",
-                    default=u"A portlet to show FireBase in Plone, a Demo.")
+    label = _(u"title_add_firebase_chat_portlet", default=u"Add FireBase chat portlet")
+    description = _(u"description_firebase_chat_portlet",
+                    default=u"A chat portlet to show FireBase in Plone, a Demo.")
 
     def create(self, data):
         return Assignment(**data)
@@ -163,6 +163,6 @@ class EditForm(base.EditForm):
     """
     form_fields = form.Fields(IFireBasePloneDemoPortlet)
     #form_fields['text'].custom_widget = WYSIWYGWidget
-    label = _(u"title_edit_firebaseplonedemo_portlet", default=u"Edit FireBasePloneDemo portlet")
-    description = _(u"description_firebaseplonedemo_portlet",
-                    default=u"A portlet to show FireBase in Plone, a Demo.")
+    label = _(u"title_edit_firebase_chat_portlet", default=u"Edit FireBase chat portlet")
+    description = _(u"description_firebase_chat_portlet",
+                    default=u"A chat portlet to show FireBase in Plone, a Demo.")
