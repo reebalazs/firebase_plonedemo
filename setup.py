@@ -45,11 +45,11 @@ setup(name='firebaseplonedemo',
           'zope.interface',
           'zope.schema',
           'Zope2',
-          'firebase_token_generator>=1.3',
+          'firebase_token_generator>=1.4',
       ],
       dependency_links=[
           # Needs github master at the moment, because pypi egg is borken with README.md not found.
-          'http://github.com/reebalazs/firebase-token-generator-python/tarball/master#egg=firebase_token_generator-1.3',
+          'http://github.com/reebalazs/firebase-token-generator-python/tarball/master#egg=firebase_token_generator-1.4',
       ],
       entry_points="""
       [z3c.autoinclude.plugin]
