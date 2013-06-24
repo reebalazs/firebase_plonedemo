@@ -81,7 +81,7 @@ app.directive('contenteditable', function () {
             // view -> model
             elm.bind('blur', function () {
                 scope.$apply(function () {
-                    ctrl.$setViewValue(elm.html());
+                    ctrl.$setViewValue(elm.text());
                     // put back the placeholder if necessary
                     ctrl.$render();
                 });
