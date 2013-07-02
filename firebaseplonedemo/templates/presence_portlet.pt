@@ -1,0 +1,37 @@
+<tal:define tal:define="root_id view/unique_id">
+  <dl i18n:domain="plone"
+    tal:define="auth_token python: view.auth_token;"
+    tal:attributes="class string:portlet portlet-firebaseplonedemo ${view/css_class};
+      id root_id;
+      ng-init string:firebase_url = '${view/data/firebase_url}';; auth_token = '${auth_token}';; root_id = '${root_id}';; plone_username='${view/auth_data/ploneUsername}';;
+      "
+    >
+
+    <dt class="portletHeader"
+        tal:define="header view/data/header"
+        tal:attributes="class python:header and 'portletHeader' or 'portletHeader titleless'">
+        <span class="portletTopLeft"></span>
+        <span tal:content="header"></span>
+        <span class="portletTopRight"></span>
+    </dt>
+
+    <dd class="portletItem odd" ng-controller="PresenceController">
+
+        <div class="presence-names" >
+          <div ng-cloak ng-repeat="user in users">
+              ${user}
+          </div>
+        </div>
+
+        <tal:corners>
+            <span class="portletBottomLeft"></span>
+            <span class="portletBottomRight"></span>
+        </tal:corners>
+
+    </dd>
+
+  </dl>
+  <script type="text/javascript"
+    tal:content="string:angular.bootstrap(document.getElementById('${root_id}'), ['presence'])"
+    ></script>
+</tal:define>
