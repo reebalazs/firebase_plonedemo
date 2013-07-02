@@ -6,8 +6,8 @@
   <!-- Portlet type registrations -->
 
   <portlet
-    addview="firebaseplonedemo.portlet.FireBasePloneDemo"
-    title="FireBase PloneDemo portlet"
+    addview="firebaseplonedemo.portlet.chat"
+    title="FireBase chat portlet"
     description="A chat portlet"
     i18n:attributes="title;
                     description"
@@ -21,5 +21,13 @@
                     description"
     />
 
+
+  <portlet
+    addview="firebaseplonedemo.portlet.presence"
+    title="FireBase presence portlet"
+    description="A presence portlet"
+    i18n:attributes="title;
+                    description"
+    />
 
 </portlets>

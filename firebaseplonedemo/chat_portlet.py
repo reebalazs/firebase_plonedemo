@@ -18,7 +18,7 @@ from plone.portlet.static import PloneMessageFactory as _
 logger = logging.getLogger('firebaseplonedemo.portlet.FireBasePloneDemo')
 
 
-class IFireBasePloneDemoPortlet(IPortletDataProvider):
+class IFireBaseChatPortlet(IPortletDataProvider):
     """A portlet which renders predefined static HTML.
 
     It inherits from IPortletDataProvider because for this portlet, the
@@ -52,9 +52,9 @@ class Assignment(base.Assignment):
     with columns.
     """
 
-    implements(IFireBasePloneDemoPortlet)
+    implements(IFireBaseChatPortlet)
 
-    header = _(u"title_firebaseplonedemo_portlet", default=u"FireBasePloneDemo portlet")
+    header = _(u"title_firebase_chat_portlet", default=u"FireBase chat portlet")
     firebase_url = u''
     firebase_secret = u''
 
@@ -69,7 +69,7 @@ class Assignment(base.Assignment):
         "manage portlets" screen. Here, we use the title that the user gave or
         static string if title not defined.
         """
-        return self.header or _(u'portlet_firebaseplonedemo', default=u"FireBase chat Portlet")
+        return self.header or _(u'portlet_firebase_chat', default=u"FireBase chat Portlet")
 
 
 class Renderer(base.Renderer):
@@ -87,8 +87,8 @@ class Renderer(base.Renderer):
         header = self.data.header
         if header:
             normalizer = getUtility(IIDNormalizer)
-            return "portlet-firebaseplonedemo-%s" % normalizer.normalize(header)
-        return "portlet-firebaseplonedemo"
+            return "portlet-firebase-chat-%s" % normalizer.normalize(header)
+        return "portlet-firebase-chat"
 
     @property
     def unique_id(self):
@@ -101,9 +101,6 @@ class Renderer(base.Renderer):
         return unique_id
 
     USERNAME_COOKIE = '__firebaseplone_chat_username'
-
-    #def extend_data(self, data):
-    #    pass
 
     def extend_data(self, data):
         # Do we have a cookie?
@@ -145,7 +142,7 @@ class AddForm(base.AddForm):
     zope.formlib which fields to display. The create() method actually
     constructs the assignment that is being added.
     """
-    form_fields = form.Fields(IFireBasePloneDemoPortlet)
+    form_fields = form.Fields(IFireBaseChatPortlet)
     ##form_fields['text'].custom_widget = WYSIWYGWidget
     label = _(u"title_add_firebase_chat_portlet", default=u"Add FireBase chat portlet")
     description = _(u"description_firebase_chat_portlet",
@@ -161,7 +158,7 @@ class EditForm(base.EditForm):
     This is registered with configure.zcml. The form_fields variable tells
     zope.formlib which fields to display.
     """
-    form_fields = form.Fields(IFireBasePloneDemoPortlet)
+    form_fields = form.Fields(IFireBaseChatPortlet)
     #form_fields['text'].custom_widget = WYSIWYGWidget
     label = _(u"title_edit_firebase_chat_portlet", default=u"Edit FireBase chat portlet")
     description = _(u"description_firebase_chat_portlet",
