@@ -39,8 +39,8 @@
      <!-- Register the portlets -->
 
      <plone:portlet
-         name="firebaseplonedemo.portlet.FireBasePloneDemo"
-         interface=".chat_portlet.IFireBasePloneDemoPortlet"
+         name="firebaseplonedemo.portlet.chat"
+         interface=".chat_portlet.IFireBaseChatPortlet"
          assignment=".chat_portlet.Assignment"
          view_permission="zope2.View"
          edit_permission="firebaseplonedemo.portlet.AddFireBasePloneDemoPortlet"
@@ -58,6 +58,17 @@
          renderer=".poll_portlet.Renderer"
          addview=".poll_portlet.AddForm"
          editview=".poll_portlet.EditForm"
+         />
+
+    <plone:portlet
+         name="firebaseplonedemo.portlet.presence"
+         interface=".presence_portlet.IFireBasePresencePortlet"
+         assignment=".presence_portlet.Assignment"
+         view_permission="zope2.View"
+         edit_permission="firebaseplonedemo.portlet.AddFireBasePloneDemoPortlet"
+         renderer=".presence_portlet.Renderer"
+         addview=".presence_portlet.AddForm"
+         editview=".presence_portlet.EditForm"
          />
 
 </configure>
