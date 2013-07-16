@@ -1,7 +1,7 @@
 <tal:define tal:define="root_id view/unique_id">
   <dl i18n:domain="plone"
     tal:define="auth_token python: view.auth_token;"
-    tal:attributes="class string:portlet portlet-firebaseplonedemo ${view/css_class};
+    tal:attributes="class string:portlet portlet-firebase-presence ${view/css_class};
       id root_id;
       ng-init string:firebase_url = '${view/data/firebase_url}';; auth_token = '${auth_token}';; root_id = '${root_id}';; plone_username='${view/auth_data/ploneUsername}';;
       "
@@ -17,7 +17,7 @@
 
     <dd class="portletItem odd" ng-controller="PresenceController">
         <div class="presence-names" >
-          <div ng-cloak ng-repeat="(name, user) in users  | filter: user.online">
+          <div class="user" ng-cloak ng-repeat="(name, user) in users  | filter: user.online">
               {{name}}
           </div>
         </div>
