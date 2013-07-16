@@ -5,4 +5,5 @@
     <javascript id="++resource++firebaseplonedemo/dist/components/angularFire/angularFire.js" />
     <javascript id="++resource++firebaseplonedemo/chat.js" />
     <javascript id="++resource++firebaseplonedemo/poll.js" />
+    <javascript id="++resource++firebaseplonedemo/presence.js" />
 </object>
