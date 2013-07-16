@@ -1,8 +1,8 @@
 
 var app = angular.module('presence', ['firebase']);
 
-app.controller('PresenceController', ['$scope', '$timeout', 'angularFireCollection',
-    function($scope, $timeout, angularFireCollection, $q) {
+app.controller('PresenceController', ['$scope', '$timeout', 'angularFire', '$q',
+    function($scope, $timeout, angularFire, $q) {
 
         var url = $scope.firebase_url;
         var authToken = $scope.auth_token;
@@ -17,11 +17,10 @@ app.controller('PresenceController', ['$scope', '$timeout', 'angularFireCollecti
             }
         });
 
-        var onlineRef = new Firebase('https://green-test-firebase.firebaseio.com/users/');
+        var onlineRef = new Firebase('https://green-test-firebase.firebaseio.com/presence/');
         var connectedRef = new Firebase('https://green-test-firebase.firebaseio.com/.info/connected');
 
         connectedRef.on('value', function(snap) {
-            console.log('CONN', snap.val());
             if (snap.val() === true) {
                 // We're connected (or reconnected)!  Set up our presence state and
                 // tell the server to set a timestamp when we leave.
@@ -32,13 +31,8 @@ app.controller('PresenceController', ['$scope', '$timeout', 'angularFireCollecti
             }
         });
 
-/*
-        $scope.mess = angularFireCollection(url + '/messages', function() {
-            $timeout(function () {
-                el.scrollTop = el.scrollHeight;
-            });
-        });
-*/
+        // bind the data so we can display it
+        var promise = angularFire(onlineRef, $scope, 'users', {});
 
     }
 

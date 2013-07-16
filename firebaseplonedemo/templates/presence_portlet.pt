@@ -16,10 +16,9 @@
     </dt>
 
     <dd class="portletItem odd" ng-controller="PresenceController">
-
         <div class="presence-names" >
-          <div ng-cloak ng-repeat="user in users">
-              ${user}
+          <div ng-cloak ng-repeat="(name, user) in users  | filter: user.online">
+              {{name}}
           </div>
         </div>
 
