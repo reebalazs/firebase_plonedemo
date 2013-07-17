@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<object name="portal_javascripts" meta_type="JavaScripts Registry">
+    <javascript id="++resource++firebaseploneportlets/dist/angular.min.js"
+        compression="none"/>
+    <javascript id="++resource++firebaseploneportlets/dist/components/angularFire/angularFire.js" />
+    <javascript id="++resource++firebaseploneportlets/chat.js" />
+    <javascript id="++resource++firebaseploneportlets/poll.js" />
+    <javascript id="++resource++firebaseploneportlets/presence.js" />
+</object>

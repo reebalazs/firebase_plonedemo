@@ -3,6 +3,6 @@
 
 A chat portlet.
 
-There is a [live demo](http://firebaseplonedemo.greenfinity.hu).
+There is a [live demo](http://firebaseploneportlets.greenfinity.hu).
 
 

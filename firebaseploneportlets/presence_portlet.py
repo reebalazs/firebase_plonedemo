@@ -1,6 +1,5 @@
 import re
 import logging
-import random
 from firebase_token_generator import create_token
 
 from zope import schema
@@ -15,10 +14,10 @@ from plone.portlets.interfaces import IPortletDataProvider
 from plone.app.portlets.portlets import base
 from plone.portlet.static import PloneMessageFactory as _
 
-logger = logging.getLogger('firebaseplonedemo.portlet.FireBasePloneDemo')
+logger = logging.getLogger('firebaseploneportlets')
 
 
-class IFireBasePollPortlet(IPortletDataProvider):
+class IFireBasePresencePortlet(IPortletDataProvider):
     """A portlet which renders predefined static HTML.
 
     It inherits from IPortletDataProvider because for this portlet, the
@@ -52,9 +51,10 @@ class Assignment(base.Assignment):
     with columns.
     """
 
-    implements(IFireBasePollPortlet)
+    implements(IFireBasePresencePortlet)
 
-    header = _(u"title_firebase_poll_portlet", default=u"FireBase poll portlet")
+    header = _(u"title_firebase_presence_portlet", 
+        default=u"FireBase presence portlet")
     firebase_url = u''
     firebase_secret = u''
 
@@ -69,7 +69,7 @@ class Assignment(base.Assignment):
         "manage portlets" screen. Here, we use the title that the user gave or
         static string if title not defined.
         """
-        return self.header or _(u'portlet_firebase_poll', default=u"FireBase poll Portlet")
+        return self.header or _(u'portlet_firebase_presence', default=u"FireBase presence Portlet")
 
 
 class Renderer(base.Renderer):
@@ -79,7 +79,7 @@ class Renderer(base.Renderer):
     rendered, and the implicit variable 'view' will refer to an instance
     of this class. Other methods can be added and referenced in the template.
     """
-    render = ViewPageTemplateFile('templates/poll_portlet.pt')
+    render = ViewPageTemplateFile('templates/presence_portlet.pt')
 
     def css_class(self):
         """Generate a CSS class from the portlet header
@@ -87,8 +87,9 @@ class Renderer(base.Renderer):
         header = self.data.header
         if header:
             normalizer = getUtility(IIDNormalizer)
-            return "portlet-firebase-poll-%s" % normalizer.normalize(header)
-        return "portlet-firebase-poll"
+            return "portlet-firebase-presence-%s" % \
+                (normalizer.normalize(header), )
+        return "portlet-firebase-presence"
 
     @property
     def unique_id(self):
@@ -96,17 +97,18 @@ class Renderer(base.Renderer):
         """
         next_id = self.request.firebase_plonedemo_next_id = \
             getattr(self.request, 'firebase_plonedemo_next_id', 0)
-        unique_id = "portlet-firebase-poll-id-%04i" % (next_id, )
+        unique_id = "portlet-firebase-presence-id-%04i" % (next_id, )
         self.request.firebase_plonedemo_next_id += 1
         return unique_id
 
     def extend_data(self, data):
-        pass
+        userid = data['ploneUserid']
+        data['ploneUsername'] = userid if userid is not None else 'Anonymous'
 
     @property
     def auth_data(self):
         portal_state = getMultiAdapter((self.context, self.request),
-            name="plone_portal_state")
+                        name="plone_portal_state")
         plone_userid = portal_state.member().getId()
         custom_data = {
             'ploneUserid': plone_userid,
@@ -120,6 +122,7 @@ class Renderer(base.Renderer):
         admin = False
         options = {'admin': admin}
         token = create_token(self.data.firebase_secret, custom_data, options)
+        print "auth_token", token
         return token
 
 
@@ -130,11 +133,11 @@ class AddForm(base.AddForm):
     zope.formlib which fields to display. The create() method actually
     constructs the assignment that is being added.
     """
-    form_fields = form.Fields(IFireBasePollPortlet)
+    form_fields = form.Fields(IFireBasePresencePortlet)
     ##form_fields['text'].custom_widget = WYSIWYGWidget
-    label = _(u"title_add_firebase_poll_portlet", default=u"Add FireBase poll portlet")
-    description = _(u"description_firebase_poll_portlet",
-                    default=u"A poll portlet to show FireBase in Plone, a Demo.")
+    label = _(u"title_add_firebase_presence_portlet", default=u"Add FireBase presence portlet")
+    description = _(u"description_firebase_presence_portlet",
+                    default=u"A presence portlet to show FireBase in Plone, a Demo.")
 
     def create(self, data):
         return Assignment(**data)
@@ -146,8 +149,8 @@ class EditForm(base.EditForm):
     This is registered with configure.zcml. The form_fields variable tells
     zope.formlib which fields to display.
     """
-    form_fields = form.Fields(IFireBasePollPortlet)
+    form_fields = form.Fields(IFireBasePresencePortlet)
     #form_fields['text'].custom_widget = WYSIWYGWidget
-    label = _(u"title_edit_firebase_poll_portlet", default=u"Edit FireBase poll portlet")
-    description = _(u"description_firebase_poll_portlet",
-                    default=u"A poll portlet to show FireBase in Plone, a Demo.")
+    label = _(u"title_edit_firebase_presence_portlet", default=u"Edit FireBase presence portlet")
+    description = _(u"description_firebase_presence_portlet",
+                    default=u"A presence portlet to show FireBase in Plone, a Demo.")

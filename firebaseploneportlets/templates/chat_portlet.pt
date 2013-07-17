@@ -1,6 +1,6 @@
 <tal:define tal:define="root_id view/unique_id">
   <dl i18n:domain="plone"
-    tal:attributes="class string:portlet portlet-firebaseplonedemo ${view/css_class};
+    tal:attributes="class string:portlet portlet-firebaseploneportlets ${view/css_class};
       id root_id;
       ng-init string:firebase_url = '${view/data/firebase_url}';; auth_token = '${view/auth_token}';; root_id = '${root_id}';; USERNAME_COOKIE='${view/USERNAME_COOKIE}';; plone_username='${view/auth_data/ploneUsername}';
       "

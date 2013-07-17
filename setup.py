@@ -7,7 +7,7 @@ def read(*rnames):
 
 version = '0.1.0'
 
-setup(name='firebaseplonedemo',
+setup(name='firebaseploneportlets',
       version=version,
       description="",
       long_description="",
