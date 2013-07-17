@@ -1,6 +1,22 @@
 
 var app = angular.module('presence', ['firebase']);
 
+app.filter('isOnline', function() {
+    return function(users) {
+        // XXX quite disturbingly and inconsistently, the filter
+        // will receive the entire collection.
+        var filtered = {};
+        if (users !== undefined) {
+            $.each(users, function (key, user) {
+                if (user.online && user.online != {}) {
+                    filtered[key] = user;
+                }
+            });
+        }
+        return filtered;
+    };
+});
+
 app.controller('PresenceController', ['$scope', '$timeout', 'angularFire', '$q',
     function($scope, $timeout, angularFire, $q) {
 
