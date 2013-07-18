@@ -17,12 +17,11 @@ app.filter('isOnline', function() {
     };
 });
 
-app.controller('PresenceController', ['$scope', '$timeout', 'angularFire', '$q',
-    function($scope, $timeout, angularFire, $q) {
+app.controller('PresenceController', ['$scope', '$timeout', 'angularFire',
+    function($scope, $timeout, angularFire) {
 
         var url = $scope.firebase_url;
         var authToken = $scope.auth_token;
-        var $root = angular.element('#' + $scope.root_id);
         $scope.username = $scope.plone_username;
 
         // Log me in.
