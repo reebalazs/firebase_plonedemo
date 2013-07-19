@@ -1,6 +1,7 @@
 import os
 from setuptools import setup, find_packages
 
+
 def read(*rnames):
     return open(os.path.join(os.path.dirname(__file__), *rnames)).read()
 
@@ -8,8 +9,8 @@ version = '0.1.0'
 
 setup(name='firebaseploneportlets',
       version=version,
-      description="",
-      long_description="",
+      description="Demo portlets to show AngularJS and Firebase working together in Plone.",
+      long_description=read('README.rst'),
       classifiers=[
           "Environment :: Web Environment",
           "Framework :: Plone",
